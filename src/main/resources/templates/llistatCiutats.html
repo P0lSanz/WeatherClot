@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ciudades</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #c0a8ff, #8b2bd6);
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #fff;
+      margin-top: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 500px;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    th {
+      background-color: #8b2bd6;
+      color: white;
+    }
+
+    #borrar {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #editar {
+      background-color: #1C428C;
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #tornar {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    a {
+      display: inline-block;
+      background-color: #8b2bd6;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #6d1dab;
+    }
+
+    a:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    a:active {
+      transform: translateY(1px);
+    }
+
+    h2 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #8b2bd6;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #6d1dab;
+    }
+  </style>
+</head>
+<body>
+<h1>Ciudades</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Ciutat</th>
+    <th>Editar</th>
+    <th>Esborrar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="ciutat : ${ciutats}">
+    <td th:text="${ciutat.getNom()}"></td>
+    <td>
+      <form th:action="@{/ciutats/{id}/editar(id=${ciutat.getNom()})}" method="post">
+        <input type="hidden" name="_method" value="PUT" />
+        <input type="text" name="consultaFetch" placeholder="Nova consulta" />
+        <button id="editar" type="submit">Editar</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/ciutats/{id}(id=${ciutat.getNom()})}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button id="borrar" type="submit">Eliminar</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br><br>
+<h2>Afegir ciutat</h2>
+<form action="/ciutats/crearCiutat" method="post">
+  <input type="text" name="nom" placeholder="Nom de la ciutat">
+  <input type="text" name="consultaFetch" placeholder="URL de la crida a la API">
+  <input type="submit" value="Afegir nova ciutat">
+</form>
+<br>
+<br>
+<div id="tornar">
+<a href="/dashboard">Tornar al dashboard</a>
+</div>
+</body>
+</html>

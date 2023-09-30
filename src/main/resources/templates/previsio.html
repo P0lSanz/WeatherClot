@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Previsió</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weather-icons/css/weather-icons.min.css" />
+    <link rel="stylesheet" href="../static/css/previsions.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #c0a8ff, #8b2bd6);
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: #fff;
+            margin-top: 10%;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        th,
+        td {
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        th {
+            background-color: #8b2bd6;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .wi {
+            font-size: 3em;
+            padding: 0.2em;
+        }
+
+        i {
+            font-size: 3em;
+            padding: 0.2em;
+        }
+
+        #tornar {
+            margin-top: 5%;
+            margin-bottom: 10%;
+            text-align: center;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #8b2bd6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #6d1dab;
+        }
+
+        a:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        a:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+
+<body>
+<br><br><br>
+<h2>Previsions Meteorologiques</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Ciutat</th>
+        <th>Meteorologia</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ciutat, dia : ${ciutats}">
+        <td th:text="${ciutat.nom}"></td>
+        <td>
+            <table>
+                <tr>
+                    <th>Avui</th>
+                    <th>Demà</th>
+                    <th>Demà Passat</th>
+                </tr>
+                <tr>
+                            <span th:each="numWeathercode : ${previsions[__${dia.index}__]}">
+                                <td>
+                                    <div th:switch="${numWeathercode}">
+                                        <i class="wi wi-day-sunny" th:case="0"></i>
+                                        <i class="wi wi-day-sunny" th:case="1"></i>
+                                        <i class="wi wi-day-cloudy" th:case="2"></i>
+                                        <i class="wi wi-day-cloudy" th:case="3"></i>
+                                        <i class="wi wi-day-cloudy" th:case="45"></i>
+                                        <i class="wi wi-day-rain" th:case="51"></i>
+                                        <i class="wi wi-day-rain" th:case="51"></i>
+                                        <i class="wi wi-day-rain" th:case="53"></i>
+                                        <i class="wi wi-day-rain" th:case="55"></i>
+                                        <i class="wi wi-day-sleet" th:case="56"></i>
+                                        <i class="wi wi-day-sleet" th:case="57"></i>
+                                        <i class="wi wi-day-rain" th:case="61"></i>
+                                        <i class="wi wi-day-rain" th:case="63"></i>
+                                        <i class="wi wi-day-rain" th:case="65"></i>
+                                        <i class="wi wi-day-sleet" th:case="66"></i>
+                                        <i class="wi wi-day-sleet" th:case="67"></i>
+                                        <i class="wi wi-day-snow" th:case="71"></i>
+                                        <i class="wi wi-day-snow" th:case="73"></i>
+                                        <i class="wi wi-day-snow" th:case="75"></i>
+                                        <i class="wi wi-day-snow" th:case="77"></i>
+                                        <i class="wi wi-day-showers" th:case="80"></i>
+                                        <i class="wi wi-day-showers" th:case="81"></i>
+                                        <i class="wi wi-day-showers" th:case="82"></i>
+                                        <i class="wi wi-day-snow" th:case="85"></i>
+                                        <i class="wi wi-day-snow" th:case="86"></i>
+                                        <i class="wi wi-thunderstorm" th:case="95"></i>
+                                        <i class="wi wi-thunderstorm" th:case="96"></i>
+                                        <i class="wi wi-thunderstorm" th:case="99"></i>
+                                    </div>
+                                </td>
+                            </span>
+                        </tr>
+                    </table>
+                    <!-- <span th:text="${prev}"></span>
+                <span th:unless="${prevStat.last}">
+                    ,
+                </span> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<br><br>
+<div id="tornar">
+    <a href="/dashboard">Tornar al dashboard</a>
+</div>
+<br><br><br>
+</body>
+
+</html>

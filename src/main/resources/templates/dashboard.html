@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WEATHERCLOT</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #c0a8ff, #8b2bd6);
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 36px;
+            color: #fff;
+        }
+
+        h5 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        form {
+            margin: 0 auto;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        label {
+            color: #616161;
+        }
+
+        input[type="submit"] {
+            display: block;
+            margin: 20px auto 0;
+            background-color: #8b2bd6;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6d1dab;
+        }
+
+        #llistat {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #8b2bd6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #6d1dab;
+        }
+
+        a:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        a:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+
+<body>
+<h2>THEWEATHERCLOT</h2>
+<br>
+<h5>Sobre quines ciutats vols veure les previsions?</h5>
+
+<form action="/guardarCiutats" method="post">
+    <div th:each="ciutat : ${ciutats}">
+        <input type="checkbox" th:id="${ciutat.nom}" th:name="ciutatsSeleccionades" th:value="${ciutat.nom}">
+        <label th:for="${ciutat.nom}" th:text="${ciutat.nom}"></label><br>
+    </div>
+    <input type="submit" value="Veure les previsions">
+</form>
+<div id="llistat">
+    <a th:if="${idUsuari == '5541174561392'}" href="/ciutats/llistatCiutats">El meu llistat de ciutats</a><br>
+</div>
+
+</body>
+</html>

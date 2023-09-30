@@ -1,0 +1,33 @@
+h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    color: #fff; /* Color blanco */
+    text-shadow: 2px 2px #000; /* Sombra de texto */
+    margin-top: 2rem;
+}
+
+a {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #8b2bd6; /* Color morado */
+    color: #fff; /* Color blanco */
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    margin-top: 2rem;
+    text-decoration: none;
+    text-align: center;
+}
+
+body {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/006/171/616/non_2x/cloud-and-sun-weather-icons-with-background-purple-3d-rendering-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
